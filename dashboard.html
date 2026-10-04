@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Planla</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="dashboard.css">
+</head>
+<body>
+  <aside class="sidebar">
+    <div class="logo">🎓 <span>PLANLA<b>.</b></span></div>
+    <nav class="side-nav">
+      <a href="#" data-view="home" class="active">🏠 Ana Sayfa</a>
+      <a href="#" data-view="cal">📅 Takvim</a>
+      <a href="#" data-dlg="tasks">✅ Görevler</a>
+      <a href="#" data-dlg="settingsDlg">⚙️ Ayarlar</a>
+      <a href="#" data-logout>↩️ Hesap değiştir</a>
+    </nav>
+    <div class="mini-cal">
+      <div class="cal-head"><button id="prev" aria-label="Önceki ay">‹</button><strong id="calTitle"></strong><button id="next" aria-label="Sonraki ay">›</button></div>
+      <div class="cal-grid" id="calendar"></div>
+    </div>
+  </aside>
+
+  <div class="main">
+    <header class="topbar">
+      <nav class="top-nav">
+        <a href="#" data-view="home" class="active">Dashboard</a>
+        <a href="#" data-view="ac"><span id="navAc"></span><small id="navAcSub"></small></a>
+        <a href="#" data-view="ca">Kariyer<small id="navCaSub"></small></a>
+        <a href="#" data-view="cal">Takvim</a>
+      </nav>
+      <div class="user">
+        <a href="#" class="gear" data-dlg="tasks" aria-label="Görevler">✅</a>
+        <a href="#" class="gear" data-dlg="settingsDlg" aria-label="Ayarlar">⚙️</a>
+        <span class="bell">🔔<i id="bell">0</i></span>
+        <span class="avatar" id="avatar">?</span>
+        <div id="userBox" title="Adını değiştirmek için tıkla"><strong id="uname"></strong><small id="userRole"></small></div>
+      </div>
+    </header>
+
+    <main class="content">
+      <div class="welcome">
+        <div><h1 id="hello"></h1><p id="helloSub"></p></div>
+        <input type="search" id="q" placeholder="Ara..." aria-label="Ara">
+      </div>
+
+      <!-- ANA SAYFA -->
+      <div class="view on" id="v-home">
+        <section class="card dark" id="card-tl">
+          <div class="card-head"><h2>Bugün</h2><button class="chip" data-view="cal" data-today>Takvimi aç</button></div>
+          <ul id="timeline"></ul>
+          <form data-form="ev" data-day="today" class="add">
+            <input type="time" name="time" required><input name="t" placeholder="Başlık" required>
+            <select name="type"></select><button>Ekle</button>
+          </form>
+        </section>
+        <section class="card dark" id="card-ev">
+          <div class="card-head"><h2>Yaklaşanlar &amp; Başvurular</h2></div>
+          <ul class="rows" id="upcoming"></ul>
+          <ul class="rows" id="applied"></ul>
+        </section>
+        <section class="card dark" id="card-ln">
+          <div class="card-head"><h2>Hızlı Bağlantılar</h2></div>
+          <div class="quick-grid" id="links"></div>
+          <form data-form="link" class="add"><input name="n" placeholder="Ad" required><input name="u" placeholder="https://..." required><button>Ekle</button></form>
+        </section>
+      </div>
+
+      <!-- BÜYÜK TAKVİM -->
+      <div class="view" id="v-cal">
+        <section class="card light bigcal">
+          <div class="card-head">
+            <h2 id="bigTitle"></h2>
+            <div class="cal-tools"><button class="chip" id="bPrev">‹</button><button class="chip" id="bToday">Bugün</button><button class="chip" id="bNext">›</button></div>
+          </div>
+          <div class="big-grid" id="bigGrid"></div>
+        </section>
+        <section class="card dark" id="dayPanel">
+          <div class="card-head"><h2 id="dayTitle"></h2></div>
+          <ul id="dayList"></ul>
+          <form data-form="ev" data-day="sel" class="add">
+            <input type="time" name="time" required><input name="t" placeholder="Başlık" required>
+            <select name="type"></select><button>Ekle</button>
+          </form>
+        </section>
+      </div>
+
+      <!-- AKADEMİK / PROJELER -->
+      <div class="view" id="v-ac">
+        <section class="card light" id="card-ac">
+          <div class="card-head"><h2 id="acTitle"></h2></div>
+          <p class="gpa" id="gpa"></p>
+          <div class="bars" id="bars"></div>
+          <ul class="rows" id="courses"></ul>
+          <form data-form="course" class="add"><input name="n" required><input type="number" name="g" min="0" max="100" required><button>Ekle</button></form>
+          <h3>Yaklaşan Teslimler</h3>
+          <ul class="rows" id="deadlines"></ul>
+          <form data-form="deadline" class="add"><input name="t" placeholder="Başlık" required><input type="date" name="d" required><button>Ekle</button></form>
+        </section>
+      </div>
+
+      <!-- KARİYER -->
+      <div class="view" id="v-ca">
+        <section class="card dark" id="card-ca">
+          <div class="card-head"><h2>Kariyer Gelişimi</h2></div>
+          <h3 id="jobsTitle"></h3>
+          <ul class="jobs" id="jobs"></ul>
+          <form data-form="job" class="add"><input name="n" placeholder="Şirket - Pozisyon" required><button>Ekle</button></form>
+          <h3>Beceri Gelişimi</h3>
+          <ul class="skills" id="skills"></ul>
+          <form data-form="skill" class="add"><input name="n" placeholder="Yeni beceri" required><button>Ekle</button></form>
+        </section>
+      </div>
+    </main>
+  </div>
+
+  <dialog id="tasks">
+    <h2>Görevlerim</h2>
+    <form data-form="task" class="add"><input name="t" placeholder="Yeni görev" required><button>Ekle</button></form>
+    <ul class="rows" id="taskList"></ul>
+    <button class="close" id="closeTasks">Kapat</button>
+  </dialog>
+
+  <section id="auth" class="onboard">
+    <div class="onboard-box">
+      <div class="logo">🎓 <span>PLANLA<b>.</b></span></div>
+      <h1>Planla'ya giriş</h1>
+      <div class="tabs">
+        <button type="button" data-tab="login" class="cur">Giriş yap</button>
+        <button type="button" data-tab="reg">Hesap oluştur</button>
+      </div>
+      <form id="authForm">
+        <input id="aUser" class="name-in" placeholder="Kullanıcı adı" autocomplete="username" aria-label="Kullanıcı adı" required>
+        <input id="aPass" class="name-in" type="password" placeholder="Şifre (en az 4 karakter)" autocomplete="current-password" aria-label="Şifre" required>
+        <div id="regOnly" hidden>
+          <p class="lbl">Kullanım türü (bir kez seçilir)</p>
+          <div class="type-pick">
+            <label><input type="radio" name="tur" value="student" checked><span><b>🎓 Öğrenci</b><small>Dersler, notlar, staj</small></span></label>
+            <label><input type="radio" name="tur" value="work"><span><b>💼 İş</b><small>Projeler, toplantılar</small></span></label>
+          </div>
+        </div>
+        <p class="warn" id="authMsg" role="alert"></p>
+        <button class="close" id="authBtn">Giriş yap</button>
+      </form>
+      <div id="accList"></div>
+      <p class="note">Hesaplar bu tarayıcıda saklanır. Her hesabın verisi ayrıdır ve çıkış yapıp başka hesaba geçince silinmez.</p>
+    </div>
+  </section>
+
+  <dialog id="settingsDlg">
+    <h2>Ayarlar</h2>
+    <label class="lbl" for="setName">Adın</label>
+    <input id="setName" class="name-in" placeholder="Adın">
+    <p class="lbl">Hesap</p>
+    <p id="setAcc"></p>
+    <button class="reset" id="reset">Verilerimi sıfırla</button>
+    <button class="reset" data-logout>Çıkış yap / hesap değiştir</button>
+    <button class="reset danger" data-delacc>Hesabımı sil</button>
+    <button class="close" id="closeSettings">Kapat</button>
+  </dialog>
+  <script src="dashboard.js"></script>
+</body>
+</html>
