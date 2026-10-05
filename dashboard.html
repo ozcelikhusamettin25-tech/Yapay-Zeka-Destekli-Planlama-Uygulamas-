@@ -3,69 +3,142 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Planla</title>
+  <title>Planla — Yapay Zeka Destekli Planlama</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="dashboard.css">
 </head>
 <body>
+  <!-- ============ SVG İKON SPRITE ============ -->
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <symbol id="i-home" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></symbol>
+    <symbol id="i-book" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></symbol>
+    <symbol id="i-briefcase" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></symbol>
+    <symbol id="i-calendar" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></symbol>
+    <symbol id="i-settings" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></symbol>
+    <symbol id="i-logout" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></symbol>
+    <symbol id="i-search" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></symbol>
+    <symbol id="i-bell" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/></symbol>
+    <symbol id="i-plus" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></symbol>
+    <symbol id="i-x" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></symbol>
+    <symbol id="i-chevron-left" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></symbol>
+    <symbol id="i-chevron-right" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></symbol>
+    <symbol id="i-chevron-down" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></symbol>
+    <symbol id="i-graduation" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></symbol>
+    <symbol id="i-target" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></symbol>
+    <symbol id="i-link" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></symbol>
+    <symbol id="i-clock" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></symbol>
+    <symbol id="i-note" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></symbol>
+    <!-- Avatar ikonları -->
+    <symbol id="av-book" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></symbol>
+    <symbol id="av-star" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></symbol>
+    <symbol id="av-heart" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></symbol>
+    <symbol id="av-code" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></symbol>
+    <symbol id="av-target" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></symbol>
+    <symbol id="av-lightning" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></symbol>
+    <symbol id="av-mountain" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3l4 8 5-5 5 15H2L8 3z"/></symbol>
+    <symbol id="av-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></symbol>
+  </svg>
+
+  <!-- ============ SOL MENÜ ============ -->
   <aside class="sidebar">
-    <div class="logo">🎓 <span>PLANLA<b>.</b></span></div>
-    <nav class="side-nav">
-      <a href="#" data-view="home" class="active">🏠 Ana Sayfa</a>
-      <a href="#" data-view="cal">📅 Takvim</a>
-      <a href="#" data-dlg="tasks">✅ Görevler</a>
-      <a href="#" data-dlg="settingsDlg">⚙️ Ayarlar</a>
-      <a href="#" data-logout>↩️ Hesap değiştir</a>
+    <div class="logo">
+      <span class="logo-mark"><svg width="22" height="22"><use href="#i-graduation"/></svg></span>
+      <span>PLANLA<b>.</b></span>
+    </div>
+    <nav class="side-nav" aria-label="Ana menü">
+      <a href="#" data-view="home" class="active"><svg width="18" height="18"><use href="#i-home"/></svg> Ana Sayfa</a>
+      <a href="#" data-view="ac"><svg width="18" height="18"><use href="#i-book"/></svg> <span id="navAc">Akademik</span></a>
+      <a href="#" data-view="ca"><svg width="18" height="18"><use href="#i-briefcase"/></svg> Kariyer</a>
+      <a href="#" data-view="cal"><svg width="18" height="18"><use href="#i-calendar"/></svg> Takvim</a>
+      <a href="#" data-dlg="tasks"><svg width="18" height="18"><use href="#i-check"/></svg> Görevler</a>
+      <a href="#" data-dlg="settingsDlg"><svg width="18" height="18"><use href="#i-settings"/></svg> Ayarlar</a>
+      <a href="#" data-logout><svg width="18" height="18"><use href="#i-logout"/></svg> Hesap değiştir</a>
     </nav>
-    <div class="mini-cal">
-      <div class="cal-head"><button id="prev" aria-label="Önceki ay">‹</button><strong id="calTitle"></strong><button id="next" aria-label="Sonraki ay">›</button></div>
-      <div class="cal-grid" id="calendar"></div>
+
+    <div class="mini-cal" id="miniCal" data-collapsed="false">
+      <button type="button" class="mini-cal-toggle" id="miniCalToggle" aria-expanded="true">
+        <span><svg width="14" height="14"><use href="#i-calendar"/></svg> Takvim</span>
+        <svg width="14" height="14" class="chev"><use href="#i-chevron-down"/></svg>
+      </button>
+      <div class="mini-cal-body">
+        <div class="cal-head">
+          <button type="button" id="prev" aria-label="Önceki ay"><svg width="16" height="16"><use href="#i-chevron-left"/></svg></button>
+          <strong id="calTitle"></strong>
+          <button type="button" id="next" aria-label="Sonraki ay"><svg width="16" height="16"><use href="#i-chevron-right"/></svg></button>
+        </div>
+        <div class="cal-grid" id="calendar"></div>
+      </div>
     </div>
   </aside>
 
   <div class="main">
+    <!-- ============ ÜST BAR ============ -->
     <header class="topbar">
-      <nav class="top-nav">
-        <a href="#" data-view="home" class="active">Dashboard</a>
-        <a href="#" data-view="ac"><span id="navAc"></span><small id="navAcSub"></small></a>
-        <a href="#" data-view="ca">Kariyer<small id="navCaSub"></small></a>
-        <a href="#" data-view="cal">Takvim</a>
-      </nav>
+      <div class="search-wrap">
+        <svg width="18" height="18" class="search-icon"><use href="#i-search"/></svg>
+        <input type="search" id="q" placeholder="Ara... (etkinlik, ders, görev)" aria-label="Ara">
+      </div>
       <div class="user">
-        <a href="#" class="gear" data-dlg="tasks" aria-label="Görevler">✅</a>
-        <a href="#" class="gear" data-dlg="settingsDlg" aria-label="Ayarlar">⚙️</a>
-        <span class="bell">🔔<i id="bell">0</i></span>
-        <span class="avatar" id="avatar">?</span>
-        <div id="userBox" title="Adını değiştirmek için tıkla"><strong id="uname"></strong><small id="userRole"></small></div>
+        <button type="button" class="icon-btn bell" id="bellBtn" aria-label="Bildirimler">
+          <svg width="20" height="20"><use href="#i-bell"/></svg><i id="bell">0</i>
+        </button>
+        <a href="#" class="icon-btn" data-dlg="settingsDlg" aria-label="Ayarlar"><svg width="20" height="20"><use href="#i-settings"/></svg></a>
+        <button type="button" class="profile" id="userBox" title="Profil">
+          <span class="avatar" id="avatar">?</span>
+          <span class="profile-info"><strong id="uname"></strong><small id="userRole"></small></span>
+        </button>
       </div>
     </header>
 
     <main class="content">
       <div class="welcome">
-        <div><h1 id="hello"></h1><p id="helloSub"></p></div>
-        <input type="search" id="q" placeholder="Ara..." aria-label="Ara">
+        <div>
+          <h1 id="hello"></h1>
+          <p id="helloSub"></p>
+        </div>
+        <div class="welcome-date" id="welcomeDate"></div>
       </div>
 
       <!-- ANA SAYFA -->
       <div class="view on" id="v-home">
-        <section class="card dark" id="card-tl">
-          <div class="card-head"><h2>Bugün</h2><button class="chip" data-view="cal" data-today>Takvimi aç</button></div>
+        <section class="card dark card-lg" id="card-tl">
+          <div class="card-head">
+            <h2>Bugün</h2>
+            <div class="card-tools">
+              <button type="button" class="chip" data-view="cal" data-today>Takvimi aç</button>
+              <button type="button" class="icon-add" data-open="dlgEvent" data-day="today" aria-label="Etkinlik ekle"><svg width="16" height="16"><use href="#i-plus"/></svg></button>
+            </div>
+          </div>
           <ul id="timeline"></ul>
-          <form data-form="ev" data-day="today" class="add">
-            <input type="time" name="time" required><input name="t" placeholder="Başlık" required>
-            <select name="type"></select><button>Ekle</button>
-          </form>
         </section>
+
         <section class="card dark" id="card-ev">
-          <div class="card-head"><h2>Yaklaşanlar &amp; Başvurular</h2></div>
+          <div class="card-head"><h2>Yaklaşanlar</h2></div>
           <ul class="rows" id="upcoming"></ul>
-          <ul class="rows" id="applied"></ul>
         </section>
-        <section class="card dark" id="card-ln">
-          <div class="card-head"><h2>Hızlı Bağlantılar</h2></div>
-          <div class="quick-grid" id="links"></div>
-          <form data-form="link" class="add"><input name="n" placeholder="Ad" required><input name="u" placeholder="https://..." required><button>Ekle</button></form>
+
+        <section class="card accent" id="card-note">
+          <div class="card-head">
+            <h2>Notlar</h2>
+            <button type="button" class="icon-add" data-open="dlgNote" aria-label="Not ekle"><svg width="16" height="16"><use href="#i-plus"/></svg></button>
+          </div>
+          <div class="notes-grid" id="notes"></div>
+        </section>
+
+        <section class="card light" id="card-task">
+          <div class="card-head">
+            <h2>Görevler</h2>
+            <button type="button" class="chip light-chip" data-dlg="tasks">Tümü</button>
+          </div>
+          <ul class="rows" id="homeTaskList"></ul>
+        </section>
+
+        <section class="card light" id="card-applied">
+          <div class="card-head"><h2>Başvurular</h2></div>
+          <ul class="rows" id="applied"></ul>
         </section>
       </div>
 
@@ -74,31 +147,38 @@
         <section class="card light bigcal">
           <div class="card-head">
             <h2 id="bigTitle"></h2>
-            <div class="cal-tools"><button class="chip" id="bPrev">‹</button><button class="chip" id="bToday">Bugün</button><button class="chip" id="bNext">›</button></div>
+            <div class="cal-tools">
+              <button type="button" class="chip light-chip" id="bPrev"><svg width="14" height="14"><use href="#i-chevron-left"/></svg></button>
+              <button type="button" class="chip light-chip" id="bToday">Bugün</button>
+              <button type="button" class="chip light-chip" id="bNext"><svg width="14" height="14"><use href="#i-chevron-right"/></svg></button>
+            </div>
           </div>
           <div class="big-grid" id="bigGrid"></div>
         </section>
         <section class="card dark" id="dayPanel">
-          <div class="card-head"><h2 id="dayTitle"></h2></div>
+          <div class="card-head">
+            <h2 id="dayTitle"></h2>
+            <button type="button" class="icon-add" data-open="dlgEvent" data-day="sel" aria-label="Etkinlik ekle"><svg width="16" height="16"><use href="#i-plus"/></svg></button>
+          </div>
           <ul id="dayList"></ul>
-          <form data-form="ev" data-day="sel" class="add">
-            <input type="time" name="time" required><input name="t" placeholder="Başlık" required>
-            <select name="type"></select><button>Ekle</button>
-          </form>
         </section>
       </div>
 
       <!-- AKADEMİK / PROJELER -->
       <div class="view" id="v-ac">
         <section class="card light" id="card-ac">
-          <div class="card-head"><h2 id="acTitle"></h2></div>
+          <div class="card-head">
+            <h2 id="acTitle"></h2>
+            <button type="button" class="icon-add" data-open="dlgCourse" aria-label="Ders ekle"><svg width="16" height="16"><use href="#i-plus"/></svg></button>
+          </div>
           <p class="gpa" id="gpa"></p>
           <div class="bars" id="bars"></div>
           <ul class="rows" id="courses"></ul>
-          <form data-form="course" class="add"><input name="n" required><input type="number" name="g" min="0" max="100" required><button>Ekle</button></form>
-          <h3>Yaklaşan Teslimler</h3>
+          <h3 class="sec-title">
+            <span>Yaklaşan Teslimler</span>
+            <button type="button" class="icon-add small" data-open="dlgDeadline" aria-label="Teslim ekle"><svg width="14" height="14"><use href="#i-plus"/></svg></button>
+          </h3>
           <ul class="rows" id="deadlines"></ul>
-          <form data-form="deadline" class="add"><input name="t" placeholder="Başlık" required><input type="date" name="d" required><button>Ekle</button></form>
         </section>
       </div>
 
@@ -106,61 +186,159 @@
       <div class="view" id="v-ca">
         <section class="card dark" id="card-ca">
           <div class="card-head"><h2>Kariyer Gelişimi</h2></div>
-          <h3 id="jobsTitle"></h3>
+          <h3 class="sec-title">
+            <span id="jobsTitle"></span>
+            <button type="button" class="icon-add" data-open="dlgJob" aria-label="Başvuru ekle"><svg width="16" height="16"><use href="#i-plus"/></svg></button>
+          </h3>
           <ul class="jobs" id="jobs"></ul>
-          <form data-form="job" class="add"><input name="n" placeholder="Şirket - Pozisyon" required><button>Ekle</button></form>
-          <h3>Beceri Gelişimi</h3>
+          <h3 class="sec-title">
+            <span>Beceri Gelişimi</span>
+            <button type="button" class="icon-add" data-open="dlgSkill" aria-label="Beceri ekle"><svg width="16" height="16"><use href="#i-plus"/></svg></button>
+          </h3>
           <ul class="skills" id="skills"></ul>
-          <form data-form="skill" class="add"><input name="n" placeholder="Yeni beceri" required><button>Ekle</button></form>
         </section>
       </div>
     </main>
   </div>
 
+  <!-- ============ BİLDİRİM PANELİ ============ -->
+  <div class="notif-panel" id="notifPanel" aria-hidden="true">
+    <div class="notif-head">
+      <h3>Bildirimler</h3>
+      <button type="button" class="icon-close" id="notifClose" aria-label="Kapat"><svg width="16" height="16"><use href="#i-x"/></svg></button>
+    </div>
+    <div class="notif-list" id="notifList"></div>
+    <div class="notif-foot">
+      <button type="button" class="chip light-chip" id="notifClear">Tümünü temizle</button>
+    </div>
+  </div>
+
+  <!-- MODAL: Görevler -->
   <dialog id="tasks">
-    <h2>Görevlerim</h2>
-    <form data-form="task" class="add"><input name="t" placeholder="Yeni görev" required><button>Ekle</button></form>
+    <div class="dlg-head"><h2>Görevlerim</h2><button type="button" class="icon-close" id="closeTasks" aria-label="Kapat"><svg width="18" height="18"><use href="#i-x"/></svg></button></div>
     <ul class="rows" id="taskList"></ul>
-    <button class="close" id="closeTasks">Kapat</button>
+    <form data-form="task" class="dialog-form">
+      <label class="fld">Yeni görev<input name="t" placeholder="Örn: Fizik ödevi" required></label>
+      <div class="dialog-actions"><button type="submit" class="btn-primary">Ekle</button></div>
+    </form>
   </dialog>
 
-  <section id="auth" class="onboard">
-    <div class="onboard-box">
-      <div class="logo">🎓 <span>PLANLA<b>.</b></span></div>
-      <h1>Planla'ya giriş</h1>
-      <div class="tabs">
-        <button type="button" data-tab="login" class="cur">Giriş yap</button>
-        <button type="button" data-tab="reg">Hesap oluştur</button>
-      </div>
-      <form id="authForm">
-        <input id="aUser" class="name-in" placeholder="Kullanıcı adı" autocomplete="username" aria-label="Kullanıcı adı" required>
-        <input id="aPass" class="name-in" type="password" placeholder="Şifre (en az 4 karakter)" autocomplete="current-password" aria-label="Şifre" required>
-        <div id="regOnly" hidden>
-          <p class="lbl">Kullanım türü (bir kez seçilir)</p>
-          <div class="type-pick">
-            <label><input type="radio" name="tur" value="student" checked><span><b>🎓 Öğrenci</b><small>Dersler, notlar, staj</small></span></label>
-            <label><input type="radio" name="tur" value="work"><span><b>💼 İş</b><small>Projeler, toplantılar</small></span></label>
-          </div>
-        </div>
-        <p class="warn" id="authMsg" role="alert"></p>
-        <button class="close" id="authBtn">Giriş yap</button>
-      </form>
-      <div id="accList"></div>
-      <p class="note">Hesaplar bu tarayıcıda saklanır. Her hesabın verisi ayrıdır ve çıkış yapıp başka hesaba geçince silinmez.</p>
-    </div>
-  </section>
-
+  <!-- MODAL: Ayarlar -->
   <dialog id="settingsDlg">
-    <h2>Ayarlar</h2>
+    <div class="dlg-head"><h2>Ayarlar</h2><button type="button" class="icon-close" id="closeSettings" aria-label="Kapat"><svg width="18" height="18"><use href="#i-x"/></svg></button></div>
     <label class="lbl" for="setName">Adın</label>
     <input id="setName" class="name-in" placeholder="Adın">
     <p class="lbl">Hesap</p>
     <p id="setAcc"></p>
-    <button class="reset" id="reset">Verilerimi sıfırla</button>
-    <button class="reset" data-logout>Çıkış yap / hesap değiştir</button>
-    <button class="reset danger" data-delacc>Hesabımı sil</button>
-    <button class="close" id="closeSettings">Kapat</button>
+    <button type="button" class="reset" id="reset">Verilerimi sıfırla</button>
+    <button type="button" class="reset" data-logout>Çıkış yap / hesap değiştir</button>
+    <button type="button" class="reset danger" data-delacc>Hesabımı sil</button>
   </dialog>
-  <script src="dashboard.js"></script>
-</body>
-</html>
+
+  <!-- MODAL: Profil -->
+  <dialog id="profileDlg">
+    <div class="dlg-head"><h2>Profil</h2><button type="button" class="icon-close" data-dialog-close aria-label="Kapat"><svg width="18" height="18"><use href="#i-x"/></svg></button></div>
+    <div class="profile-hero">
+      <div class="avatar avatar-lg" id="profileAvatar">?</div>
+      <div class="profile-hero-info">
+        <strong id="profileName">—</strong>
+        <small id="profileRole">—</small>
+      </div>
+    </div>
+
+    <label class="lbl" for="profileNameInput">Adın</label>
+    <input id="profileNameInput" class="name-in" placeholder="Adın" maxlength="30">
+
+    <p class="lbl">Avatar seç</p>
+    <div class="avatar-grid" id="avatarGrid"></div>
+
+    <div class="profile-actions">
+      <button type="button" class="btn-primary profile-save" id="profileSave">Kaydet</button>
+    </div>
+
+    <hr class="profile-sep">
+
+    <button type="button" class="reset" data-logout>Çıkış yap / hesap değiştir</button>
+    <button type="button" class="reset danger" data-delacc>Hesabımı sil</button>
+  </dialog>
+
+  <!-- MODAL: Etkinlik Ekle -->
+  <dialog id="dlgEvent">
+    <div class="dlg-head"><h2>Etkinlik Ekle</h2><button type="button" class="icon-close" data-dialog-close aria-label="Kapat"><svg width="18" height="18"><use href="#i-x"/></svg></button></div>
+    <form data-form="ev" data-day="today" class="dialog-form">
+      <label class="fld">Başlık<input name="t" placeholder="Örn: Fizik dersi" required></label>
+      <label class="fld">Saat<input type="time" name="time" required></label>
+      <label class="fld">Tür<select name="type"></select></label>
+      <div class="dialog-actions">
+        <button type="button" class="btn-ghost" data-dialog-close>İptal</button>
+        <button type="submit" class="btn-primary">Ekle</button>
+      </div>
+    </form>
+  </dialog>
+
+  <!-- MODAL: Not Ekle -->
+  <dialog id="dlgNote">
+    <div class="dlg-head"><h2>Not Ekle</h2><button type="button" class="icon-close" data-dialog-close aria-label="Kapat"><svg width="18" height="18"><use href="#i-x"/></svg></button></div>
+    <form data-form="note" class="dialog-form">
+      <label class="fld">Başlık<input name="title" placeholder="Örn: Alışveriş listesi" required></label>
+      <label class="fld">İçerik<textarea name="text" placeholder="Notunu buraya yaz..." rows="4" required></textarea></label>
+      <label class="fld">Renk<select name="color">
+        <option value="yellow">Sarı</option>
+        <option value="teal">Turkuaz</option>
+        <option value="purple">Mor</option>
+        <option value="coral">Mercan</option>
+        <option value="green">Yeşil</option>
+      </select></label>
+      <div class="dialog-actions">
+        <button type="button" class="btn-ghost" data-dialog-close>İptal</button>
+        <button type="submit" class="btn-primary">Ekle</button>
+      </div>
+    </form>
+  </dialog>
+
+  <!-- MODAL: Ders / Proje -->
+  <dialog id="dlgCourse">
+    <div class="dlg-head"><h2>Ders / Proje Ekle</h2><button type="button" class="icon-close" data-dialog-close aria-label="Kapat"><svg width="18" height="18"><use href="#i-x"/></svg></button></div>
+    <form data-form="course" class="dialog-form">
+      <label class="fld">Ad<input name="n" required></label>
+      <label class="fld">Not / İlerleme (0-100)<input type="number" name="g" min="0" max="100" required></label>
+      <div class="dialog-actions">
+        <button type="button" class="btn-ghost" data-dialog-close>İptal</button>
+        <button type="submit" class="btn-primary">Ekle</button>
+      </div>
+    </form>
+  </dialog>
+
+  <!-- MODAL: Teslim -->
+  <dialog id="dlgDeadline">
+    <div class="dlg-head"><h2>Teslim Ekle</h2><button type="button" class="icon-close" data-dialog-close aria-label="Kapat"><svg width="18" height="18"><use href="#i-x"/></svg></button></div>
+    <form data-form="deadline" class="dialog-form">
+      <label class="fld">Başlık<input name="t" required></label>
+      <label class="fld">Tarih<input type="date" name="d" required></label>
+      <div class="dialog-actions">
+        <button type="button" class="btn-ghost" data-dialog-close>İptal</button>
+        <button type="submit" class="btn-primary">Ekle</button>
+      </div>
+    </form>
+  </dialog>
+
+  <!-- MODAL: Başvuru -->
+  <dialog id="dlgJob">
+    <div class="dlg-head"><h2>Başvuru Ekle</h2><button type="button" class="icon-close" data-dialog-close aria-label="Kapat"><svg width="18" height="18"><use href="#i-x"/></svg></button></div>
+    <form data-form="job" class="dialog-form">
+      <label class="fld">Şirket - Pozisyon<input name="n" placeholder="Örn: TÜBİTAK - Stajyer" required></label>
+      <div class="dialog-actions">
+        <button type="button" class="btn-ghost" data-dialog-close>İptal</button>
+        <button type="submit" class="btn-primary">Ekle</button>
+      </div>
+    </form>
+  </dialog>
+
+  <!-- MODAL: Beceri -->
+  <dialog id="dlgSkill">
+    <div class="dlg-head"><h2>Beceri Ekle</h2><button type="button" class="icon-close" data-dialog-close aria-label="Kapat"><svg width="18" height="18"><use href="#i-x"/></svg></button></div>
+    <form data-form="skill" class="dialog-form">
+      <label class="fld">Beceri<input name="n" placeholder="Örn: Python" required></label>
+      <div class="dialog-actions">
+        <button type="button" class="btn-ghost" data-dialog-close>İptal</button>
+        <button type="submit" class
