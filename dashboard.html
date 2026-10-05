@@ -341,4 +341,42 @@
       <label class="fld">Beceri<input name="n" placeholder="Örn: Python" required></label>
       <div class="dialog-actions">
         <button type="button" class="btn-ghost" data-dialog-close>İptal</button>
-        <button type="submit" class
+        <button type="submit" class="btn-primary">Ekle</button>
+      </div>
+    </form>
+  </dialog>
+
+  <!-- GİRİŞ EKRANI -->
+  <section id="auth" class="onboard">
+    <div class="onboard-box">
+      <div class="logo logo-lg">
+        <span class="logo-mark"><svg width="26" height="26"><use href="#i-graduation"/></svg></span>
+        <span>PLANLA<b>.</b></span>
+      </div>
+      <h1>Planla'ya giriş</h1>
+      <p class="sub">Akademik ve kariyer planlaman tek yerde.</p>
+      <div class="tabs">
+        <button type="button" data-tab="login" class="cur">Giriş yap</button>
+        <button type="button" data-tab="reg">Hesap oluştur</button>
+      </div>
+      <form id="authForm">
+        <input id="aUser" class="name-in" placeholder="Kullanıcı adı" autocomplete="username" aria-label="Kullanıcı adı" required>
+        <input id="aPass" class="name-in" type="password" placeholder="Şifre (en az 4 karakter)" autocomplete="current-password" aria-label="Şifre" required>
+        <div id="regOnly" hidden>
+          <p class="lbl">Kullanım türü (bir kez seçilir)</p>
+          <div class="type-pick">
+            <label><input type="radio" name="tur" value="student" checked><span><b>Öğrenci</b><small>Dersler, notlar, staj</small></span></label>
+            <label><input type="radio" name="tur" value="work"><span><b>İş</b><small>Projeler, toplantılar</small></span></label>
+          </div>
+        </div>
+        <p class="warn" id="authMsg" role="alert"></p>
+        <button type="submit" class="close" id="authBtn">Giriş yap</button>
+      </form>
+      <div id="accList"></div>
+      <p class="note">Hesaplar bu tarayıcıda saklanır. Her hesabın verisi ayrıdır.</p>
+    </div>
+  </section>
+
+  <script src="dashboard.js"></script>
+</body>
+</html>
